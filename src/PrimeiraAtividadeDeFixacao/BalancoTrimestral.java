@@ -1,4 +1,4 @@
-package AtividadeDeFixacao;
+package PrimeiraAtividadeDeFixacao;
 
 public class BalancoTrimestral {
     public static void main(String[] args) {

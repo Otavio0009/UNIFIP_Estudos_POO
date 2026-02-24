@@ -1,4 +1,4 @@
-package AtividadeDeFixacao;
+package PrimeiraAtividadeDeFixacao;
 
 public class Exercicio_01 {
     public static void main(String[] args) {
