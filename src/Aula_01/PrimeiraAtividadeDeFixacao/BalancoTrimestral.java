@@ -1,4 +1,4 @@
-package PrimeiraAtividadeDeFixacao;
+package Aula_01.PrimeiraAtividadeDeFixacao;
 
 public class BalancoTrimestral {
     public static void main(String[] args) {

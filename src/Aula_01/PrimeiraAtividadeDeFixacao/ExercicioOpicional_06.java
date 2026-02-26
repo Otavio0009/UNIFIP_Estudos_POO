@@ -1,4 +1,4 @@
-package PrimeiraAtividadeDeFixacao;
+package Aula_01.PrimeiraAtividadeDeFixacao;
 import java.util.Scanner;
 
 public class ExercicioOpicional_06 {
