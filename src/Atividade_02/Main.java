@@ -31,10 +31,10 @@ public class Main {
         c1.deposito(1000);
 
         ContaCorrente cc2 = new ContaCorrente();
-        cc.deposito(2000);
+        cc2.deposito(2000);
 
         ContaPoupanca cp2 = new ContaPoupanca();
-        cp.deposito(3000);
+        cp2.deposito(3000);
 
         meuBanco.adiciona(c1);
         meuBanco.adiciona(cc2);
@@ -49,7 +49,7 @@ public class Main {
         System.out.println();
 
         for (int i = 0; i < meuBanco.pegaTotalDeContas(); i++) {
-            System.out.println("Conta pos: " + i);
+            System.out.println("Conta pos: " + i+1);
 
             System.out.println();
 

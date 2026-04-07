@@ -18,7 +18,7 @@ public class Conta {
 
     public void deposito(double valor) {
         if (valor > 0) {
-            this.setSaldo(this.getSaldo() + valor);
+            this.saldo += valor;
             System.out.println("Depositado é efetuado com sucesso!");
         } else {
             System.out.println("Valor invalido");
@@ -27,7 +27,7 @@ public class Conta {
 
     public boolean retira(double valor) {
         if (valor > 0 && valor <= this.getSaldo()) {
-            this.setSaldo(this.getSaldo() - valor);
+            this.saldo -= valor;
             return true;
         } else {
             return false;
@@ -35,6 +35,6 @@ public class Conta {
     }
 
     public void atualizar(double taxaSelic) {
-        this.setSaldo(this.getSaldo() * (1 + taxaSelic));
+        this.saldo = this.saldo * (1 + taxaSelic);
     }
 }
