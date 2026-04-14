@@ -12,12 +12,12 @@ public abstract class Conta {
         return saldo;
     }
 
-    public void deposito(double valor) {
+    public boolean deposito(double valor) {
         if (valor > 0) {
             this.saldo += valor;
-            System.out.println("Depositado é efetuado com sucesso!");
+            return true;
         } else {
-            System.out.println("Valor invalido");
+            return false;
         }
     }
 

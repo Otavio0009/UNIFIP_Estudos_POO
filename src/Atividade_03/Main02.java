@@ -4,8 +4,8 @@ public class Main02 {
     public static void main(String[] args) {
 
         Conta[] contas = new Conta[2];
-        contas[0] = new ContaCorrente();
-        contas[1] = new ContaPoupanca();
+        //contas[0] = new ContaCorrente();
+        contas[0]  = new ContaPoupanca(); // [1]
 
         contas[0].deposito(1000.0);
         contas[1].deposito(1000.0);
@@ -31,17 +31,17 @@ public class Main02 {
 
         Banco meuBanco = new Banco();
 
-        Conta c1 = new ContaCorrente();
-        c1.deposito(1000);
+        //Conta c1 = new ContaCorrente();
+        //c1.deposito(1000);
 
-        ContaCorrente cc2 = new ContaCorrente();
-        cc2.deposito(2000);
+        //ContaCorrente cc2 = new ContaCorrente();
+        //cc2.deposito(2000);
 
         ContaPoupanca cp2 = new ContaPoupanca();
         cp2.deposito(3000);
 
-        meuBanco.adiciona(c1);
-        meuBanco.adiciona(cc2);
+        //meuBanco.adiciona(c1);
+        //meuBanco.adiciona(cc2);
         meuBanco.adiciona(cp2);
 
         System.out.println();
