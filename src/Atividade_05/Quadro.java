@@ -3,7 +3,7 @@ package Atividade_05;
 public class Quadro implements AreaCalculavel {
     private int lado;
 
-    Quadro(int lado) {
+    public Quadro(int lado) {
         this.lado = lado;
     }
 
