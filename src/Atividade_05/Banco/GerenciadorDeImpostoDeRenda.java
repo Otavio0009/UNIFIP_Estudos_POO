@@ -4,16 +4,18 @@ public class GerenciadorDeImpostoDeRenda {
     private double taxa;
     private double total;
 
+    public GerenciadorDeImpostoDeRenda(double taxa) {
+        this.taxa = taxa;
+    }
+
     public double getTotal() {
         return total;
     }
 
-    public void adiciona(Tributavel t, double taxa) {
+    public void adiciona(Tributavel t) {
         System.out.println("Adicionando Tributavel: " + t);
 
-        double valorTributo = t.calcularTributos(taxa);
-
-        this.total += valorTributo;
+        this.total += t.calcularTributos(this.taxa);
 
         System.out.println("Total de tributos acumulado: R$ " + this.total);
     }
