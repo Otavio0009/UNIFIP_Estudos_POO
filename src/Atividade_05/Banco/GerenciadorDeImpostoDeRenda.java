@@ -8,6 +8,10 @@ public class GerenciadorDeImpostoDeRenda {
         this.taxa = taxa;
     }
 
+    public GerenciadorDeImpostoDeRenda() {
+        this.taxa = 0;
+    }
+
     public double getTotal() {
         return total;
     }
