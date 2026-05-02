@@ -5,11 +5,66 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+    private static void acaoIndividual(ArrayList<Personagem> lista, Scanner sc) {
+        System.out.print("Digite o nome do personagem: "); String busca = sc.nextLine();
+
+        Personagem encontrado = null;
+
+        for (Personagem p : lista) {
+            if (p.getNoma().equals(busca)) {
+                encontrado = p;
+                break;
+            }
+        }
+
+        if (encontrado != null) {
+            System.out.println("1- Atacar\n2- Habilidade Especial"); int acao = sc.nextInt();
+
+            try {
+                if (acao == 1) {
+                    encontrado.atacar();
+                } else if (acao == 2) {
+                    ((HabilidadesEspeciais) encontrado).usarHabilidadeEspecial();
+                }
+            } catch (RecursoInsuficienteException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+
+        } else {
+
+            System.out.println("Personagem não enontrado");
+        }
+    }
+
+    private static void cadastrar (int tipo, ArrayList<Personagem> lista, Scanner sc) {
+        try {
+            System.out.print("Nome: "); String nome = sc.nextLine();
+            System.out.print("Vida: "); int vida = sc.nextInt();
+            System.out.print("Nível: "); int nivel = sc.nextInt();
+
+            if (tipo == 1) {
+                System.out.print("Força: "); int forca = sc.nextInt();
+                lista.add(new Guereiro(nome, nivel, vida, forca));
+            } else if (tipo == 2) {
+                System.out.print("Mana"); int mana = sc.nextInt();
+                lista.add(new Mago(nome, nivel, vida, mana));
+            } else if (tipo == 3) {
+                System.out.println("Flechas: "); int flechas = sc.nextInt();
+                lista.add(new Arqueiro(nome, nivel, vida, flechas));
+            }
+
+            System.out.println("Cadastrado realizado com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro de cadastro: " + e.getMessage());
+        }
+    }
+
     static void main(String[] args) {
         ArrayList<Personagem> personagens = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
+        Scanner sc= new Scanner(System.in);
 
         int opcao = 0;
+
         do {
             try {
                 System.out.println("===== ARENA DE TREINAMENTO =====");
@@ -21,7 +76,6 @@ public class Main {
                 System.out.println("6- Usar habilidades especiais");
                 System.out.println("7- Ação individual (Desafio)");
                 System.out.println("8- Sair");
-                System.out.print("Escolha uma opção: ");
 
                 opcao = sc.nextInt();
                 sc.nextLine();
@@ -30,20 +84,17 @@ public class Main {
                     case 1:
                     case 2:
                     case 3:
-                        cadastrar(opcao, personagens, sc);
+                        cadastrar(opcao, personagens,sc);
                         break;
                     case 4:
                         for (Personagem p : personagens) {
                             System.out.println("Tipo: " + p.getClass().getSimpleName());
-
-                            p.status();
-                            System.out.println("----");
+                            p.exibirStatus();
                         }
                         break;
                     case 5:
                         for (Personagem p : personagens) {
-                            try { p.atacar(); }
-                            catch (RecursoInsuficienteException e) {
+                            try { p.atacar();} catch (RecursoInsuficienteException e) {
                                 System.out.println("Erro: " + e.getMessage());
                             }
                         }
@@ -51,8 +102,9 @@ public class Main {
                     case 6:
                         for (Personagem p : personagens) {
                             if (p instanceof HabilidadesEspeciais) {
-                                try { ((HabilidadesEspeciais) p).usarHabilidadesEspeciais(); }
-                                catch (RecursoInsuficienteException e) {
+                                try {
+                                    ((HabilidadesEspeciais) p).usarHabilidadeEspecial();
+                                } catch (RecursoInsuficienteException e) {
                                     System.out.println("Erro: " + e.getMessage());
                                 }
                             }
@@ -63,67 +115,10 @@ public class Main {
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Entrada invalida. Digite novamente.");
+                System.out.println("Entrada invalida. Digite novamente!");
             } catch (Exception e) {
                 System.out.println("Erro: " + e.getMessage());
             }
         } while (opcao != 8);
-    }
-
-    private static void cadastrar(int tipo, ArrayList<Personagem> lista, Scanner sc) {
-        try {
-            System.out.print("Nome: "); String nome = sc.nextLine();
-            System.out.print("Nível: "); int nivel = sc.nextInt();
-            System.out.print("Vida: "); int vida = sc.nextInt();
-
-            if (tipo == 1) {
-
-                System.out.print("Força: "); int f = sc.nextInt();
-                lista.add(new Guereiro(nome, nivel, vida, f));
-
-            } else if (tipo == 2) {
-
-                System.out.print("Mana: "); int m = sc.nextInt();
-                lista.add(new Mago(nome, nivel, vida, m));
-
-            } else {
-
-                System.out.print("Flechas: "); int fl = sc.nextInt();
-                lista.add(new Arqueiro(nome, nivel, vida, fl));
-            }
-
-            System.out.println("Cadastrdo com ucesso!");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro no cadastro: " + e.getMessage());
-        }
-    }
-
-    private static void acaoIndividual(ArrayList<Personagem> lista, Scanner sc) {
-        System.out.print("Digite o nome do personagem: ");
-        String busca = sc.nextLine();
-
-        Personagem encontrado = null;
-
-        for (Personagem p : lista) {
-            if (p.getNome().equals(busca)) {
-                encontrado = p;
-                break;
-            }
-        }
-
-        if (encontrado != null) {
-            System.out.print("1 - Atacar\n2 - Habilidade Especial");
-            int acao = sc.nextInt();
-
-            try {
-                if (acao == 1) encontrado.atacar();
-                else if (encontrado instanceof HabilidadesEspeciais) ((HabilidadesEspeciais) encontrado) .usarHabilidadesEspeciais();
-            } catch (Exception e) {
-                System.out.println("Erro: " + e.getMessage());
-            }
-        } else {
-
-            System.out.println("Nenhum personagem encontrado!");
-        }
     }
 }
