@@ -1,44 +1,40 @@
 package Atividade_06;
 
-public class Arqueiro extends Personagem implements HabilidadesEspeciais{
-    private int flechas;
+public class Arqueiro extends Personagem implements HabilidadesEspeciais {
+    private int flecha;
 
-    public Arqueiro(String noma, int nivel, int vida, int flechas) {
-        super(noma, nivel, vida);
-        this.setFlechas(flechas);
+    public Arqueiro(String nome, int nivel, int vida, int flecha) {
+        super(nome, nivel, vida);
+        setFlecha(flecha);
     }
 
-    public int getFlechas() {
-        return flechas;
-    }
-
-    public void setFlechas(int flechas) {
-        if (flechas < 1) throw new IllegalArgumentException("Flechas não podem ser menro que 1!");
-        this.flechas = flechas;
+    public void setFlecha(int flecha) {
+        if (flecha < 0) throw new IllegalArgumentException("A quantidade de Flechas não pode ser negativa!");
+        this.flecha = flecha;
     }
 
     @Override
     public void atacar() throws RecursoInsuficienteException {
         try {
-            if (this.getFlechas() >= 1) {
-                System.out.println("O arquiero " + this.getNoma() + " atirou uma flecha!");
-                this.flechas --;
+            if (flecha >= 1) {
+                System.out.println("O arqueiro " + getNome() + " atirou uma flechas!");
+                flecha --;
             } else {
-                throw new RecursoInsuficienteException("Flechas insuficientes!");
+                throw new RecursoInsuficienteException("Não tem flechas para atacar");
             }
         } catch (RecursoInsuficienteException e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.println("Erro : " + e.getMessage());
         }
     }
 
     @Override
     public void usarHabilidadeEspecial() throws RecursoInsuficienteException {
         try {
-            if (this.getFlechas() >= 3) {
-                System.out.println("O arqueiro " + this.getNoma() + " usou Chuva de Flechas!");
-                this.flechas -= 3;
+            if (flecha >= 3) {
+                System.out.println("O arqueiro " + getNome() + " usou Chuva de Flechas");
+                flecha -= 3;
             } else {
-                throw new RecursoInsuficienteException("Flechas insuficientes para usar habilidade especial!");
+                throw new RecursoInsuficienteException("Não tem flechas usuficiente para usar habilidade especial!");
             }
         } catch (RecursoInsuficienteException e) {
             System.out.println("Erro: " + e.getMessage());

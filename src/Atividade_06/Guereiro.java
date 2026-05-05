@@ -1,11 +1,11 @@
 package Atividade_06;
 
-public class Guereiro extends Personagem implements HabilidadesEspeciais {
+public class Guereiro extends Personagem implements HabilidadesEspeciais{
     private int forca;
 
-    public Guereiro(String noma, int nivel, int vida, int forca) {
-        super(noma, nivel, vida);
-        this.setForca(forca);
+    public Guereiro(String nome, int nivel, int vida, int forca) {
+        super(nome, nivel, vida);
+        setForca(forca);
     }
 
     public int getForca() {
@@ -13,25 +13,17 @@ public class Guereiro extends Personagem implements HabilidadesEspeciais {
     }
 
     public void setForca(int forca) {
-        if (forca < 0) throw new IllegalArgumentException("Força não pode ser menro que zero!");
+        if (forca < 0) throw new IllegalArgumentException("A força não pode ser negativa!");
         this.forca = forca;
     }
 
     @Override
-    public void atacar() throws RecursoInsuficienteException {
-        if (this.getForca() < 1) throw new RecursoInsuficienteException("Força não pode ser negativa!");
-
-        System.out.println("O gurreiro " + getNoma() + " atacou sua espada!");
-        this.forca --;
+    public void atacar() throws RecursoInsuficienteException{
+        System.out.println("O guerreiro " + getNome() + " atacou com a espada!");
     }
 
     @Override
     public void usarHabilidadeEspecial() throws RecursoInsuficienteException {
-        if (this.getForca() < 5) throw new RecursoInsuficienteException("Força insuficiente para usar habilidade especial!");
-
-        System.out.println("O guerreiro " + this.getNoma() + " usou Golpe Brutal!");
-        this.forca -= 5;
-
-
+        System.out.println("O guerreiro " + getNome() + " usou Golpe Brutal!");
     }
 }
