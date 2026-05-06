@@ -13,21 +13,21 @@ public class Mago extends Personagem implements HabilidadesEspeciais{
     }
 
     public void setMana(int mana) {
-        if (mana < 0) throw new IllegalArgumentException("Mana não pode ser negativa!");
+        if (mana < 0) throw new IllegalArgumentException("A mana não pode ser negativa!");
         this.mana = mana;
     }
 
     @Override
     public void atacar() throws RecursoInsuficienteException {
-        System.out.println("O mago " + getNome() + " lançou bola de fogo!");
+        if (mana < 1) throw new RecursoInsuficienteException("Mana insuficienta para atacar!");
+        System.out.println("O mago " + getNome() + " lançou uma bola de fogo!");
         mana --;
     }
 
     @Override
     public void usarHabilidadeEspecial() throws RecursoInsuficienteException {
-        if (mana < 10) throw new RecursoInsuficienteException("Mana insuficiente para usar habilidade especial!");
-
-        System.out.println("O mago " + getNome() + " usaou Tempestade Arcana!");
+        if (mana < 10) throw new RecursoInsuficienteException("Mana insuficiete para usar habilidade especial!");
+        System.out.println("O mago " + getNome() + " usou Tempestade Arcana!");
         mana -= 10;
     }
 }

@@ -1,7 +1,5 @@
 package Atividade_06;
 
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,20 +12,21 @@ public class Main {
 
         do {
             try {
-                System.out.println("===== Arenade de Treinamento =====");
-                System.out.println("1- Cadastrar Guerreiro");
-                System.out.println("2- Cadastrar Mago");
-                System.out.println("3- Cadastrar Arqueiro");
-                System.out.println("4- Lista de personagens");
-                System.out.println("5- Atacra com todos os personagens");
-                System.out.println("6- Usar habilidade especial");
-                System.out.println("7- Atacar e usar habilidade especial de apenas um personagem");
-                System.out.println("8- Sair");
+                System.out.println("===== ARENA DE TREINAMENTO =====\n" +
+                        "1 - Cadastrar Guerreiro\n" +
+                        "2 - Cadastrar Mago\n" +
+                        "3 - Cadastrar Arqueiro\n" +
+                        "4 - Listar personagens\n" +
+                        "5 - Atacar com todos os personagens\n" +
+                        "6 - Usar habilidades especiais\n" +
+                        "7 - Usar apenas um personagem\n"  +
+                        "8 - Sair");
+
                 opcao = Integer.parseInt(sc.nextLine());
 
                 if (opcao >= 1 && opcao <= 3) {
                     if (opcao == 1) {
-                        System.out.println("Você escolhei o Guerreiro:");
+                        System.out.println("Você escolhei a classe Guerreiro:");
                         System.out.println("Nome: "); String nome = sc.nextLine();
                         System.out.println("Nível: "); int nivel = Integer.parseInt(sc.nextLine());
                         System.out.println("Vida: "); int vida = Integer.parseInt(sc.nextLine());
@@ -35,7 +34,7 @@ public class Main {
 
                         personagens.add(new Guereiro(nome, nivel, vida, forca));
                     } else if (opcao == 2) {
-                        System.out.println("Você escolheu o Mago:");
+                        System.out.println("Você escolhei a classe Mago:");
                         System.out.println("Nome: "); String nome = sc.nextLine();
                         System.out.println("Nível: "); int nivel = Integer.parseInt(sc.nextLine());
                         System.out.println("Vida: "); int vida = Integer.parseInt(sc.nextLine());
@@ -43,13 +42,13 @@ public class Main {
 
                         personagens.add(new Mago(nome, nivel, vida, mana));
                     } else if (opcao == 3) {
-                        System.out.println("Você escolheu o Arqueiro:");
+                        System.out.println("Você escolhei a classe Arqueiro:");
                         System.out.println("Nome: "); String nome = sc.nextLine();
                         System.out.println("Nível: "); int nivel = Integer.parseInt(sc.nextLine());
-                        System.out.println("Visda: "); int vida = Integer.parseInt(sc.nextLine());
-                        System.out.println("Mana: "); int mana = Integer.parseInt(sc.nextLine());
+                        System.out.println("Vida: "); int vida = Integer.parseInt(sc.nextLine());
+                        System.out.println("Flechas: "); int flechas = Integer.parseInt(sc.nextLine());
 
-                        personagens.add(new Arqueiro(nome, nivel, vida, mana));
+                        personagens.add(new Arqueiro(nome, nivel, vida, flechas));
                     }
                 } else if (opcao == 4) {
                     for (Personagem p : personagens) {
@@ -61,54 +60,49 @@ public class Main {
                         try {
                             p.atacar();
                         } catch (Exception e) {
-                            System.out.println("Erro: " + e.getMessage());
+                            System.out.println("Erro ao atacar: " + e.getMessage());
                         }
                     }
+
                 } else if (opcao == 6) {
                     for (Personagem p : personagens) {
                         if (p instanceof HabilidadesEspeciais) {
                             try {
                                 ((HabilidadesEspeciais) p).usarHabilidadeEspecial();
                             } catch (Exception e) {
-                                System.out.println("Erro: " + e.getMessage());
+                                System.out.println("Erro ao usar abilidade especial: " + e.getMessage());
                             }
                         }
                     }
                 } else if (opcao == 7) {
-                    System.out.println("Informe o nome do personagem: "); String busca = sc.nextLine();
+                    System.out.println("Digite o nome do personagem: ");String buscar = sc.nextLine();
                     boolean encontrar = false;
 
                     for (Personagem p : personagens) {
-                        if (p.getNome().equalsIgnoreCase(busca)) {
-
-                            System.out.println("1- Atacar");
-                            System.out.println("2- Usar Habilidade Especial");
-
+                        if (p.getNome().equalsIgnoreCase(buscar)) {
+                            encontrar = true;
+                            System.out.println("Escolha a ação:\n" +
+                                    "1 - Atacar\n" +
+                                    "2 - Usar habilidade especial");
                             int acao = Integer.parseInt(sc.nextLine());
-
                             try {
                                 if (acao == 1) {
                                     p.atacar();
                                 } else if (acao == 2) {
                                     if (p instanceof HabilidadesEspeciais) {
-                                        ((HabilidadesEspeciais) p).usarHabilidadeEspecial();
+                                        ((HabilidadesEspeciais)p).usarHabilidadeEspecial();
                                     }
                                 }
                             } catch (Exception e) {
-                                System.out.println("Erro: " + e.getMessage());
+                                System.out.println("Erro ao tentar atcar ou usar habilidade especial: " + e.getMessage());
                             }
+                            break;
                         }
-                        break;
-                    }
+                    } if (!encontrar) System.out.println("Personagem não encontrado!");
 
-                    if (!encontrar) {
-                        System.out.println("Personagem não cadastrado!");
-                    }
-                } else if (opcao == 8) {
-                    System.out.println("Saindo...");
-                }
+                } else if (opcao == 8) System.out.println("Saindo...");
             } catch (NumberFormatException e) {
-                System.out.println("Entrada invalida. Tente novamnete!");
+                System.out.println("Opção invalida. Tente novamente!");
             } catch (Exception e) {
                 System.out.println("Erro: " + e.getMessage());
             }

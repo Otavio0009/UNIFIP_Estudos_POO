@@ -28,20 +28,20 @@ public abstract class Personagem {
     }
 
     public void setNivel(int nivel) {
-        if (nivel < 1) throw new IllegalArgumentException("O nível não pode ser menor que 1!");
+        if (nivel < 1) throw new IllegalArgumentException("Não é permito nível menor que 1!");
         this.nivel = nivel;
     }
 
     public void setVida(int vida) {
-        if (vida < 0) throw new IllegalArgumentException("A vida não pode ser negativa!");
+        if (vida < 0) throw new IllegalArgumentException("Não é permitido vida negativa");
         this.vida = vida;
     }
 
     public abstract void atacar() throws RecursoInsuficienteException;
 
-    public void status() {
-        System.out.println("Nome: " + this.getNome());
-        System.out.println("Nível: " + this.getNivel());
-        System.out.println("Vida: " + this.getNome());
+    public void  status() {
+        System.out.println("Nome: " + getNome());
+        System.out.println("Nível: " + getNivel());
+        System.out.println("Vida: " + getVida());
     }
 }
